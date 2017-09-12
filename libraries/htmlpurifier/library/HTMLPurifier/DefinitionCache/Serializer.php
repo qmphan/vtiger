@@ -111,7 +111,7 @@ class HTMLPurifier_DefinitionCache_Serializer extends
         $directory = $this->generateDirectoryPath($config);
         if (!is_dir($directory)) {
             $base = $this->generateBaseDirectoryPath($config);
-            if (!is_dir($base)) {
+            if (!is_dir($base) && !mkdir($base, 0777, true)) {
                 trigger_error('Base directory '.$base.' does not exist,
                     please create or change using %Cache.SerializerPath',
                     E_USER_WARNING);
