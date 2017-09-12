@@ -37,6 +37,7 @@ class Vtiger_Viewer extends SmartyBC {
 	 * @param <String> - $media Layout/Media name
 	 */
 	function __construct($media='') {
+		global $cache_dir;
 		parent::__construct();
 
 		$THISDIR = dirname(__FILE__);
@@ -46,12 +47,12 @@ class Vtiger_Viewer extends SmartyBC {
 		if(!empty($media)) {
 			self::$currentLayout = $media;
 			$templatesDir = $THISDIR . '/../../layouts/'.$media;
-			$compileDir = $THISDIR . '/../../test/templates_c/'.$media;
+			$compileDir = $cache_dir . 'templates_c/'.$media;
 		}
 		if(!$templatesDir || !file_exists($templatesDir)) {
 			self::$currentLayout = self::getDefaultLayoutName();
 			$templatesDir = $THISDIR . '/../../layouts/'.self::getDefaultLayoutName();
-			$compileDir = $THISDIR . '/../../test/templates_c/'.self::getDefaultLayoutName();
+			$compileDir = $cache_dir. 'templates_c/'.self::getDefaultLayoutName();
 		}
 
 		if (!file_exists($compileDir)) {

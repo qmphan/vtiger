@@ -646,7 +646,7 @@ $__htmlpurifier_instance = false;
  * @return String
  */
 function vtlib_purify($input, $ignore=false) {
-	global $__htmlpurifier_instance, $root_directory, $default_charset;
+	global $__htmlpurifier_instance, $root_directory, $cache_dir, $default_charset;
 
 	static $purified_cache = array();
 	$value = $input;
@@ -660,20 +660,20 @@ function vtlib_purify($input, $ignore=false) {
 		} 
 	}
 	$use_charset = $default_charset;
-	$use_root_directory = $root_directory;
+	$use_cache_directory = $cache_dir;
 
 
 	if(!$ignore) {
 		// Initialize the instance if it has not yet done
 		if($__htmlpurifier_instance == false) {
 			if(empty($use_charset)) $use_charset = 'UTF-8';
-			if(empty($use_root_directory)) $use_root_directory = dirname(__FILE__) . '/../..';
+			if(empty($use_cache_directory)) $use_cache_directory = dirname(__FILE__) . '/../../';
 
 			include_once ('libraries/htmlpurifier/library/HTMLPurifier.auto.php');
 
 			$config = HTMLPurifier_Config::createDefault();
 			$config->set('Core', 'Encoding', $use_charset);
-			$config->set('Cache', 'SerializerPath', "$use_root_directory/test/vtlib");
+			$config->set('Cache', 'SerializerPath', $use_cache_directory."test/vtlib");
 
 			$__htmlpurifier_instance = new HTMLPurifier($config);
 		}
