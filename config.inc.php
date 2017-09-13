@@ -42,9 +42,8 @@ $db_host = $_SERVER['VTIGER_DB_HOST'];
 $db_port = $_SERVER['VTIGER_DB_PORT'];
 $enterprise_domain = $_SERVER['ENTERPRISE_DOMAIN'];
 $base_domain = $_SERVER['BASE_DOMAIN'];
-$vtiger_core_dir = $_SERVER['VTIGER_CORE_DIR'];
-$vtiger_ext_root_dir = $_SERVER['VTIGER_EXT_ROOT_DIR'];
-$vtiger_enterprise_dir = $vtiger_ext_root_dir.'/'.$enterprise_domain;
+$vtiger_root_dir = $_SERVER['VTIGER_ROOT_DIR'];
+$vtiger_enterprise_dir = $vtiger_root_dir.'/'.$enterprise_domain;
 
 $dbconfig['db_server'] = $db_host;
 $dbconfig['db_port'] = ':'.$db_port;
@@ -87,7 +86,7 @@ $site_URL = 'http://'.$enterprise_domain.'.'.$base_domain;
 // url for customer portal (Example: http://vtiger.com/portal)
 $PORTAL_URL = $site_URL.'/customerportal';
 // root directory path
-$root_directory = $vtiger_core_dir;
+$root_directory = $vtiger_enterprise_dir;
 
 // cache direcory path
 $cache_dir = $vtiger_enterprise_dir.'/cache/';
